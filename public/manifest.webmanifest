@@ -1,0 +1,9 @@
+{
+  "name": "mychat.freedomain",
+  "short_name": "mychat",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090b12",
+  "theme_color": "#090b12",
+  "description": "A place to connect, one message at a time."
+}
