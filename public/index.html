@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0d14"><title>mychat.freedomain — Connect instantly</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:dark;--bg:#090b12;--panel:#111522;--panel2:#171d2d;--line:#252c40;--text:#eef2ff;--muted:#8e99b5;--accent:#8067ff;--accent2:#37c8e8;--danger:#ff637d}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% 0%,#20204a 0,transparent 38%),var(--bg);color:var(--text);font:15px Inter,system-ui,Segoe UI,sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:11px 15px;background:linear-gradient(110deg,var(--accent),#5b8dff);color:white;font-weight:650}button:disabled{opacity:.45;cursor:not-allowed}.secondary{background:#222a3d;color:var(--text)}.danger{background:#562536;color:#ffdce3}
+input{width:100%;background:#0c101a;border:1px solid var(--line);color:var(--text);border-radius:11px;padding:12px;outline:none}input:focus{border-color:var(--accent)}
+.hidden{display:none!important}.muted{color:var(--muted)}.small{font-size:12px}.brand{font-weight:850;letter-spacing:-.7px;font-size:22px}.brand span{color:#9d8cff}
+#authView{min-height:100vh;display:grid;place-items:center;padding:22px}.auth-card{width:min(430px,100%);padding:28px;border:1px solid var(--line);border-radius:24px;background:#111522eF;box-shadow:0 25px 90px #0008}.auth-card h1{font-size:28px;margin:20px 0 6px}.auth-card form{display:grid;gap:12px;margin-top:22px}.auth-card .switch{margin-top:18px;text-align:center}
+#appView{height:100dvh;min-height:560px;padding:16px;display:grid;grid-template-columns:280px minmax(0,1fr);gap:14px;max-width:1500px;margin:auto}
+.sidebar,.chat{background:#111522ed;border:1px solid var(--line);border-radius:20px;min-height:0;overflow:hidden}.sidebar{display:flex;flex-direction:column}.side-head{padding:20px;border-bottom:1px solid var(--line)}.side-actions{display:flex;gap:8px;padding:12px}.side-actions button{flex:1;padding:10px 6px;font-size:13px}.list{overflow:auto;padding:8px;flex:1}.list-item{display:flex;align-items:center;gap:11px;padding:11px;border-radius:13px;cursor:pointer}.list-item:hover,.list-item.active{background:#242b40}.avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#8067ff,#37c8e8);display:grid;place-items:center;font-weight:800;flex:none;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover}.item-text{min-width:0;flex:1}.item-text strong,.item-text span{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.item-text span{font-size:12px;color:var(--muted);margin-top:3px}
+.chat{display:flex;flex-direction:column}.chat-head{padding:17px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.chat-head h2{font-size:17px;margin:0}.chat-body{flex:1;overflow:auto;padding:22px;display:flex;flex-direction:column;gap:12px}.welcome{margin:auto;text-align:center;max-width:400px}.welcome .big{font-size:48px}.message{max-width:min(72%,620px);align-self:flex-start;background:#20283b;padding:11px 14px;border-radius:16px 16px 16px 4px;overflow-wrap:anywhere}.message.mine{align-self:flex-end;background:linear-gradient(130deg,#5748b8,#3c68b9);border-radius:16px 16px 4px 16px}.message .meta{font-size:11px;color:#c1c9df;margin-bottom:5px}.composer{padding:14px;border-top:1px solid var(--line);display:flex;gap:10px}.composer input{flex:1}.notice{padding:10px 12px;border-radius:12px;background:#342c1b;color:#ffe3a1;font-size:12px;margin:12px}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#242b40;padding:12px 18px;border:1px solid var(--line);border-radius:12px;z-index:10;max-width:90%;box-shadow:0 8px 35px #0008}
+.mobile-back{display:none}
+@media(max-width:720px){#appView{padding:0;display:block;height:100dvh;min-height:0}.sidebar,.chat{border-radius:0;border:0;height:100dvh}.chat{display:none}.chat.mobile-open{display:flex}.sidebar.mobile-hidden{display:none}.side-head{padding:16px}.chat-head{padding:14px}.chat-body{padding:15px}.message{max-width:86%}.mobile-back{display:inline-block;margin-right:8px;background:#222a3d;padding:8px 10px}.composer{padding:10px}.composer button{padding:10px 13px}}
+</style>
+</head>
+<body>
+<section id="authView">
+ <div class="auth-card">
+  <div class="brand">mychat<span>.</span>freedomain</div>
+  <p class="muted">A place to connect, one message at a time.</p>
+  <h1 id="authTitle">Welcome back</h1><p class="muted" id="authSubtitle">Sign in to continue to your chats.</p>
+  <form id="authForm">
+   <input id="displayName" class="hidden" autocomplete="name" placeholder="Your display name" maxlength="40">
+   <input id="email" type="email" autocomplete="email" placeholder="Email address" required>
+   <input id="password" type="password" autocomplete="current-password" placeholder="Password (at least 6 characters)" minlength="6" required>
+   <button id="authSubmit">Sign in</button>
+  </form>
+  <div class="switch muted"><span id="switchText">New here?</span> <a href="#" id="switchMode" style="color:#a99aff">Create account</a></div>
+  <p class="small muted" style="margin-top:22px">Use only accounts you own. Never share your password.</p>
+ </div>
+</section>
+<section id="appView" class="hidden">
+ <aside class="sidebar" id="sidebar">
+  <div class="side-head"><div class="brand">mychat<span>.</span>freedomain</div><p class="muted small" id="myEmail"></p></div>
+  <div class="side-actions"><button id="newChat" class="secondary">Find people</button><button id="signOut" class="secondary">Sign out</button></div>
+  <div class="muted small" style="padding:8px 16px">CONVERSATIONS / PEOPLE</div>
+  <div class="list" id="peopleList"></div>
+  <div id="adminLink" class="hidden" style="padding:12px"><button class="secondary" id="adminBtn" style="width:100%">Admin dashboard</button></div>
+ </aside>
+ <main class="chat" id="chatPanel">
+  <header class="chat-head"><div style="display:flex;align-items:center;min-width:0"><button class="mobile-back" id="backBtn">←</button><div><h2 id="chatTitle">Your messages</h2><div class="muted small" id="chatSubtitle">Choose someone to start chatting</div></div></div><span class="small muted" id="chatStatus"></span></header>
+  <div class="chat-body" id="messages"><div class="welcome"><div class="big">✦</div><h2>Your space to connect</h2><p class="muted">Choose a person from the left, or find people to start a conversation.</p></div></div>
+  <form class="composer hidden" id="composer"><input id="messageInput" maxlength="4000" placeholder="Write a message…" autocomplete="off"><button>Send</button></form>
+ </main>
+</section>
+<div id="toast" class="hidden"></div>
+<script type="module" src="/app.js"></script>
+</body></html>
